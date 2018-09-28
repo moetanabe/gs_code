@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>ポン太のじゃんけん</title>
+</head>
+<body>
+
+<header>
+    <div class="result">ぽんた！<br>
+    <span id="pc_hands"><img src="img/choki.jpg"></span></div>
+    <div class="top">じゃんけん・・・<img src="img/ponta.jpg"></div>
+</header>
+
+<main>
+  <ul>
+    <li id="guu_btn"><img src="img/gu.jpg" class="guu_btn" ontouchstart=""></li>
+    <li id="cho_btn"><img src="img/choki.jpg" class="cho_btn" ontouchstart=""></li>
+    <li id="par_btn"><img src="img/pa.jpg" class="par_btn" ontouchstart=""></li>
+  </ul>
+
+    <div id="judgement">やったね!</div>
+  
+  
+  
+</main>
+
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+$(function(){
+  var pc = "pc_hands";
+  var jud = "#judgement";
+  //判定
+  var win ='<marquee bgcolor="Red" scrollamount="20">やったね!</marquee>';
+  var drw ='<marquee bgcolor="green" scrollamount="20">もういちど！</marquee>';
+  var def ='<marquee bgcolor="blue" scrollamount="20">負けちゃった・・・</marquee>';
+  //手
+  var cho ='<img src="img/choki.jpg">';
+  var guu ='<img src="img/gu.jpg">';
+  var par ='<img src="img/pa.jpg">';
+
+  //あなたがチョキをクリックしたら
+  $("#cho_btn").on("click",function(){
+    // 0=グー（負け）
+    var rand = Math.floor(Math.random()*3);
+    if(rand==0){
+        $("#"+pc).html(guu);
+        $(jud).html(def);
+    }
+
+    //1=チョキ（引き分け）
+    if(rand==1){
+      $("#"+pc).html(cho);
+      $(jud).html(drw);
+    }
+    //1=パー（勝ち）
+    if(rand==2){
+      $("#"+pc).html(par);
+      $(jud).html(win);
+    }
+  });
+
+  //あなたがグーをクリックしたら
+  $("#guu_btn").on("click",function(){
+    // 0=グー（引き分け）
+    var rand = Math.floor(Math.random()*3);
+    if(rand==0){
+      $("#"+pc).html(guu);
+      $(jud).html(drw);
+    }
+    //1=チョキ（勝ち）
+    if(rand==1){
+      $("#"+pc).html(cho);
+      $(jud).html(win);
+    }
+    //1=パー（負け）
+    if(rand==2){
+      $("#"+pc).html(par);
+      $(jud).html(def);
+    }
+  });
+
+  //あなたがパーをクリックしたら
+  $("#par_btn").on("click",function(){
+    // 0=グー（勝ち）
+    var rand = Math.floor(Math.random()*3);
+    if(rand==0){
+      $("#"+pc).html(guu);
+      $(jud).html(win);
+    }
+    //1=チョキ(負け）
+    if(rand==1){
+      $("#"+pc).html(cho);
+      $(jud).html(def);
+    }
+    //1=パー（引き分け）
+    if(rand==2){
+      $("#"+pc).html(par);
+      $(jud).html(drw);
+    }
+
+  });   
+
+});
+
+
+</script>
+</body>
+</html>

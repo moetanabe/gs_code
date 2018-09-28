@@ -1,0 +1,56 @@
+.title{
+    text-align: center;
+}
+
+.pepper{
+    cursor: pointer;
+    cursor: hand;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#wrapform {
+    width: 500px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+#wrapform {
+    background-color: #f0f8ff;
+}
+#table {
+    background-color: #ffffcc;
+}
+#table th {
+    color: #000000 !important;
+}
+#table th,
+#table td {
+    font-size: 15px !important;
+    border: 1px solid gray;
+    background-color: #ffffcc;
+}
+#tablename {
+    width: 20%;
+}
+#formtimes {
+    width: 15%;
+}
+#formjoin {
+    width: 15%;
+}
+#tablecoment {
+    width: 50%;
+}
+#form * {
+    margin: 0 0 7px 0;
+    vertical-align: text-top;
+}
+
+.accordion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

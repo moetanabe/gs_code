@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ</title>
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+
+<div class="form">
+    <div id="name">名前 <input type="text" id="username"></div>
+    <div>コメント
+        <textarea id="text" rows="3"></textarea> 
+        <button id = "send">送信</button>
+    <div id = "output" style = "overflow:auto;height:500px;border:1px solid blue"></div>
+</div>
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- 以下JavaScript領域 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- 以下Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD9wOqA23b4QbKia5ViWJoiZfPZjVIzSkc",
+    authDomain: "chatup-4b449.firebaseapp.com",
+    databaseURL: "https://chatup-4b449.firebaseio.com",
+    projectId: "chatup-4b449",
+    storageBucket: "chatup-4b449.appspot.com",
+    messagingSenderId: "758644043210"
+  };
+  firebase.initializeApp(config);
+
+  let newPostRef = firebase.database().ref();
+
+    $("#send").on("click",function(){
+        newPostRef.push({
+        username:$("#username").val(),
+        text:$("#text").val()
+        + new Date().toLocaleString('ja-JP', {era:'long'}) 
+    });
+
+        $("#text").val("");
+        $('#output').animate({scrollTop: document.getElementById("output").scrollHeight}, 'fast');
+    });
+
+    console.log($('#output'))
+
+    newPostRef.on("child_added",function(data){
+        const v = data.val();
+        const k = data.key;
+        let str = "";
+        str += '<dl>';
+        str += '<dt>'+ v.username + '</dt>';
+        str += '<dd>'+ v.text + '</dd>';
+        str += '</dl>';
+        $("#output").append(str);
+
+    });
+
+     const r = Math.ceil(Math.random()*5);
+        if(r == 1){
+            view = "褒め１";
+        }
+        if(r == 2){
+            view = "褒め２";
+        }
+        if(r == 3){
+            view = "褒め３";
+        }
+        if(r == 4){
+            view = "褒め４";
+        }
+        if(r == 5){
+            view = "褒め５";
+        }
+        
+    
+        
+        
+        
+    
+        
+    
+
+        
+        
+        
+        
+    
+
+    $("#text").on("keydown",function(e){
+        if(e.keyCode == 13){
+        fire();
+        }
+    });
+
+    function fire(){
+        newPostRef.push({
+        username:$("#username").val(),
+        text:$("#text").val()
+    });
+    
+    
+    $("#text").val("");
+    $('#output').animate({scrollTop: document.getElementById("output").scrollHeight}, 'fast');} 
+
+
+
+</script>
+
+
+<!-- 日時
+関数を作ってよぶ形式にする -->
+
+
+
+</body>
+</html>

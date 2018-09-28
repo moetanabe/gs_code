@@ -1,0 +1,18 @@
+body{
+background-color:pink;
+}
+
+.form{
+    text-align: center;
+}
+
+#output2{
+    color: red;
+    font-size: 25px;
+    padding: 100px 50px;
+
+}
+
+#output1{
+background-color: #fff;
+}

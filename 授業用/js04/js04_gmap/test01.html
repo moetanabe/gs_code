@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+              height: 100%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+            }
+          </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    
+    <script>
+        
+
+        function mapsInit(position){
+            const lat = position.coords.latitude; //緯度
+            const lon = position.coords.longitude; //経度
+            $("body").append(lat + "," + lon);
+
+        }
+        function mapsError(error){
+            let msg = "";
+            if(error.code==1){
+                msg="許可されませんでした"
+            }
+        
+            if(error.code==2){
+                msg="取得できませんでした"
+            }
+
+            if(error.code==3){
+                msg="TIMEOUT"
+            }
+        
+            alert(msg);
+        }
+         
+        const set = {
+            enableHighAccuracy:true,
+            timeout:10000,
+            maximumAge:20000
+        }
+        
+        function initMap(){
+            navigator.geolocation.getCurrentPosition(mapsInit,mapsError,set);
+        }
+        
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbAZ8srITVKx0k5YJVsn-3s5MfvG_kmjY&callback=initMap"
+    async defer></script>
+
+
+</body>
+</html>
+

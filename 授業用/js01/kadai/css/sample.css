@@ -1,0 +1,86 @@
+body{
+    margin:0;
+    padding:0;
+    font-size: 20px;
+
+}
+header{
+    padding-bottom: 30px;
+    display: flex;
+    font-weight:bold;
+}
+
+main{
+    border-bottom:1px solid #ccc;
+}
+footer{
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    padding: 0px;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    text-align: center;
+    list-style-type:none;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+
+/* グー画像 */
+img.guu_btn :hover{
+    cursor: pointer;    /* リンクをホバーしたときのカーソルにする。*/
+}
+ 
+img.guu_btn:active{ /* 画像をクリックした瞬間 */
+	/* 要素を若干下に下げることで、押した感じを出す。*/
+	/* 今いる位置から相対的に3px下に配置する。*/
+	position: relative;
+	top: 3px;
+}
+
+/* チョキ画像 */
+img.cho_btn :hover{
+	cursor: pointer;
+}
+ 
+img.cho_btn:active{
+	position: relative;
+	top: 3px;
+}
+
+/* パー画像 */
+img.par_btn :hover{
+	cursor: pointer;
+}
+ 
+img.par_btn:active{
+	position: relative;
+	top: 3px;
+}
+
+.result{
+    text-align: center;
+    color:orangered;
+}
+
+img {
+    width: 300px;
+    height: 200px;
+    }
+
+/* 
+li:hover{
+    background: magenta;
+    color:#fff;
+} 
+*/
