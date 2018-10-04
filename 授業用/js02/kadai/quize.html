@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <title>クイズ演習</title>
+</head>
+<body>
+    <header>クイズ練習（複数）</header>
+    <main>
+        <p id="quest">ここに問題が表示されます</p>
+        <p>
+            <input type="radio" name="toi" value="1"><span id="toi1">選択肢１</span>
+            <input type="radio" name="toi" value="2"><span id="toi2">選択肢２</span>
+            <input type="radio" name="toi" value="3"><span id="toi3">選択肢３</span>
+        </p>
+
+        <script>
+
+            // 問題
+            const qs =[
+                "通るときには閉まって、通らないときには開いているものは何？",
+                "話すのがとても好きな道具は何？",
+                "世界の真ん中にいる虫は何？"
+            ];
+            
+            // 選択肢
+            const toi =[
+                ["踏み切り","洗濯機","冷蔵庫"],
+                ["スプーン","シャベル","しゃもじ"],
+                ["てんとう虫","カマキリ","蚊"],
+            ];
+
+            // 答え
+            const ans = [1,2,3];
+
+            let i = 0;
+            function q(i){
+                $("#quest").html(qs[i]);
+                $("#toi1").html(toi[i][0]);
+                $("#toi2").html(toi[i][1]);
+                $("#toi3").html(toi[i][2]);
+            }
+
+            // 最初の問題を表示
+            q(i);
+        
+            // クリックイベント
+            $("[name=toi]").on("click",function(){
+                if( $(this).val() == ans[i] ){
+                    alert("正解！");
+                }else{
+                    alert("間違い！");
+                }
+                i++;
+                q(i);
+            });
+
+
+        </script>
+    </main>
+
+    
+</body>
+</html>

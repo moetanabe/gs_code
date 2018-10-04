@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>中西チェックリスト</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/test.css">
+
+<header class="title">
+    <h1>中西、行きたくない？</h1>
+    <p>Yes！高須クリニック！（ではなくて、Yesならペッパー君をクリック）</p>
+    <button class="pepper"><img src="img/pepper.png"></button>
+</header>
+
+
+
+<main class="accordion">
+    <div id="wrapform">
+        <form id="form">
+            【入力欄】
+            <br>
+            名前：<textarea id="formname"></textarea>
+            <br>
+            回数：
+                <select id="formtimes">
+                    <option>第１回</option>
+                    <option>第２回</option>
+                    <option>第３回</option>
+                </select>
+                
+            <br>
+            参加：
+                <select id="formjoin">
+                    <option>出席</option>
+                    <option>欠席</option>
+                </select>
+                
+                <br>
+                金額：<textarea id="formcoment"></textarea>
+                <br>
+        </form>
+
+        <button id="add">追加</button>
+
+    </div>
+
+    <table id="table">
+        <tr>
+            <th id="tablename">名前</th>
+            <th id="tabletimes">回数</th>
+            <th id="tablejoin">参加</th>
+            <th id="tablecoment">金額</th>
+        </tr>
+    </table>
+
+</main>
+
+<script type="text/javascript">
+
+    // 折りたたみメニュー
+    $(function(){
+        $(".accordion").css("display","none")
+        $(".pepper").click(function(){$(".accordion").slideToggle("fast");
+        });
+
+        //init
+        let data= [];
+        // let json_text = localStorage.getItem("data");
+        // data = JSON.parse(json_text);
+
+
+        if(localStorage.getItem("name1")){
+            var v1 = localStorage.getItem("name1");
+            $("#formname").val(v1);
+        }
+        if(localStorage.getItem("times1")){
+            var v1 = localStorage.getItem("times1");
+            $("#formtimes").val(v1);
+        }
+        if(localStorage.getItem("join1")){
+            var v1 = localStorage.getItem("join1");
+            $("#formjoin").val(v1);
+        }
+        if(localStorage.getItem("coment1")){
+            var v1 = localStorage.getItem("coment1");
+            $("#formcoment").val(v1);
+        }
+
+        if(localStorage.getItem("data_text")){ //jSONのテキスト版を呼び出す
+            console.log("hello aaa");
+            // var data_json = JSON.parse("data_text");
+            // console.log('data_text');
+            // console.log(data_json);     
+        }   
+
+
+            //Save クリックイベント
+    $("#add").on("click",function(){
+        const v1 = $("#formname").val();
+        const v2 = $("#formtimes").val();
+        const v3 = $("#formjoin").val();
+        const v4 = $("#formcoment").val();
+
+        // let data = 
+        data.push({
+            "name1":v1,
+            "times1":v2,
+            "join1":v3,
+            "coment1":v4
+        });
+        
+
+        localStorage.setItem("name1",v1);
+        localStorage.setItem("times1",v2);
+        localStorage.setItem("join1",v3);
+        localStorage.setItem("coment1",v4);
+
+        //Save
+        let json_text = JSON.stringify(data);    
+        localStorage.setItem("data_text",json_text);
+
+        //Display
+        var $formObject = document.getElementById("form");
+        var $tableObject = document.getElementById("table");
+        var $tr = "<tr>";
+        $tr += "<td>" + data[0].name1  + "</td>";
+        $tr += "<td>" + data[0].times1 + "</td>";
+        $tr += "<td>" + data[0].join1 + "</td>";
+        $tr += "<td>" + data[0].coment1 + "</td>";
+        $tr += "</tr>";
+        $tableObject.insertAdjacentHTML("beforeend",$tr);        
+        alert("保存しました");
+
+    });
+
+    
+    });
+
+    // 入力内容を表に吐き出す
+    // function appendToTable() {
+    //     var $formObject = document.getElementById("form");
+    //     var $tableObject = document.getElementById("table");
+    //     var $tr = "<tr>";
+    //     $tr += "<td>" + $formObject.formname.value + "</td>";
+    //     $tr += "<td>" + $formObject.formtimes.value + "</td>";
+    //     $tr += "<td>" + $formObject.formjoin.value + "</td>";
+    //     $tr += "<td>" + $formObject.formcoment.value + "</td>";
+    //     $tr += "</tr>";
+    //     $tableObject.insertAdjacentHTML("beforeend",$tr);
+
+    // }
+
+
+    // let json_ob  = JSON.parse(json_text);
+    // console.dir(json_ob){
+    //     $()
+    // }
+      
+
+      
+
+</script>

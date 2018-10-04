@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Map（座標と地図のみ）</title>
+<meta name="viewport" content="initial-scale=1.0">
+<meta charset="utf-8">
+<style>
+html, body {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+#map {
+height: 100%;
+}
+</style>
+</head>
+<body>
+
+<!--以下divをGoogleMap化-->
+<div id="map"></div>
+
+<!-- JS -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHIOt_u0oZTFTQz0TatfpjeUhFkHaTsA8&callback=initMap" async defer></script>
+<script>
+//緯度経度
+const lat_value  = 35.697239;   //緯度を代入する変数
+const lon_value  = 139.774719;  //経度を代入する変数
+const zoom_value = 15;          //zoom値１〜２０(1=世界,20=超zoom)
+let map;
+    
+function initMap() {
+  //div#mapを「GoogleMap」化
+  map = new google.maps.Map(document.getElementById('map'), {
+     center: {lat: lat_value, lng: lon_value}, //緯度,経度を設定
+     zoom: zoom_value //Zoom値設定
+  });
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

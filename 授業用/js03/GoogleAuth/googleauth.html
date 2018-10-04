@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ：Google認証</title>
+</head>
+<body>
+
+<!-- Loading画面 -->
+<div id="loading_start" style="height:100%;background-color:#e3f4fd;text-align:center;">
+    <img src="gia.gif" alt="Loading...">
+</div>
+<!--/ Loading画面 -->
+
+
+<!-- コンテンツ表示画面 -->
+<div id="loading_end" style="display:none;">
+    <button id="logout">ログアウト</button>
+    <div id="user_view">Email</div>
+    <div>名前<input type="text" id="username"></div>
+    <div>
+        <textarea rows="5" id="text"></textarea>
+        <button id="send">送信</button>
+    </div>
+    <!-- リスト表示 -->
+    <div id="output"></div>
+</div>
+<!--/ コンテンツ表示画面 -->
+
+
+<!-- 以下JavaScript領域 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- 以下Firebaseに必要 --->
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<script>
+//1. Initialize Firebase
+  let config = {
+    apiKey: "************************************",
+    authDomain: "*******************************",
+    databaseURL: "*******************************",
+    projectId: "*******************************",
+    storageBucket: "*******************************",
+    messagingSenderId: "*******************************"
+  };
+  firebase.initializeApp(config);
+    
+//2. MSG送受信準備
+let newPostRef = firebase.database().ref();
+  
+//3. イベント:MSG送信
+$("#send").on("click",function(){
+    newPostRef.push({
+        username: $("#username").val(),
+        text: $("#text").val()
+    });
+    $("#text").val("");
+});
+    
+//4. MSGデータ受信
+//child_added:毎回1個//value:毎回全てのデータを取得
+newPostRef.on('child_added',function(data) {
+    let v = data.val();  //データ取得
+    let k = data.key;    //ユニークKEY取得
+    
+    //Timelineメッセージ作成
+    let str = '<dl id="'+k+'"><dt>'+ v.username +'</dt><dd>'+ v.text +'</dd></dl>';
+    $("#output").prepend(str);
+    
+});
+
+
+
+
+//---------------------------------------------------------
+//Googleログイン
+//---------------------------------------------------------
+//firebase.auth().getRedirectResult().then(function(result){
+//    if(!result.credential){
+//        //ログインしていなければ認証画面へリダイレクト
+//        let provider = new firebase.auth.GoogleAuthProvider();
+//        firebase.auth().signInWithRedirect(provider);
+//        return;
+//    }
+//    //ログイン成功時の処理
+//
+//
+//}).catch(function(error){
+//    console.log('Error', error);
+//    //ログイン失敗時の処理
+//    $("#user_view").html("Login Error.");
+//});
+    
+//---------------------------------------------------------
+//Googleログアウト
+//---------------------------------------------------------
+
+    
+    
+    
+    
+    
+    
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

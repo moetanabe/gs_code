@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/simple.css">
+<title>Chatアプリ</title>
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+
+<div class="form">
+    <div id="name">名前<br><input type="text" id="username"></div>
+    <div>弱音を吐くと格言が出ます<br>
+        <textarea id="text" rows="5" cols="100"></textarea><br> 
+        <button id = "send">送信</button>
+        <div id = "output2"></div>
+    </div>
+    
+    <div id = "output1" style = "overflow:auto;height:150px;border:1px solid black"></div>
+    
+</div>
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- 以下JavaScript領域 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- 以下Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD9wOqA23b4QbKia5ViWJoiZfPZjVIzSkc",
+    authDomain: "chatup-4b449.firebaseapp.com",
+    databaseURL: "https://chatup-4b449.firebaseio.com",
+    projectId: "chatup-4b449",
+    storageBucket: "chatup-4b449.appspot.com",
+    messagingSenderId: "758644043210"
+  };
+  firebase.initializeApp(config);
+
+  let newPostRef = firebase.database().ref();
+
+    $("#send").on("click",function(){
+        newPostRef.push({
+        username:$("#username").val(),
+        text:$("#text").val()
+        + new Date().toLocaleString('ja-JP', {era:'long'}) 
+    });
+
+        $("#text").val("");
+        $('#output1').animate({scrollTop: document.getElementById("output1").scrollHeight}, 'fast');
+    });
+
+    console.log($('#output1'))
+
+    newPostRef.on("child_added",function(data){
+        const v = data.val();
+        const k = data.key;
+        let str = "";
+        str += '<dl>';
+        str += '<dt>'+ v.username + '</dt>';
+        str += '<dd>'+ v.text + '</dd>';
+        str += '</dl>';
+        $("#output1").append(str);
+
+    });
+
+    newPostRef.on("child_added",function(){
+
+        const r = Math.ceil(Math.random()*5);
+        
+        let view ="";
+
+        if(r == 1){
+             view = "死ぬこと以外はかすり傷";
+        }
+        if(r == 2){
+             view = "生きてるだけで丸儲け";
+        }
+        if(r == 3){
+             view = "速度を上げるばかりが人生ではない";
+        }
+        if(r == 4){
+            view = "生きるとは呼吸することではない。行動することだ。";
+        }
+        if(r == 5){
+            view = "高ければ高い壁の方が、登ったとき気持ちいい";
+        }
+        
+        $("#output2").html(view);      
+    });    
+    
+
+    $("#text").on("keydown",function(e){
+        if(e.keyCode == 13){
+        fire();
+        }
+    });
+
+    function fire(){
+        newPostRef.push({
+        username:$("#username").val(),
+        text:$("#text").val()
+        + new Date().toLocaleString('ja-JP', {era:'long'}) 
+    });
+    
+    
+    $("#text").val("");
+    $('#output1').animate({scrollTop: document.getElementById("output1").scrollHeight}, 'fast');} 
+
+
+
+</script>
+
+
+<!-- 日時
+関数を作ってよぶ形式にする -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+#map {
+    height: 100%;
+  }
+
+  html, body {
+    background-color: pink;
+    height: 75%;
+  }
+
+.wrap{
+    display: flex;
+}
+.bold{
+    font:bold;
+}
