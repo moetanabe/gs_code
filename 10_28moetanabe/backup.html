@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>神経衰弱</title>
+</head>
+<body>
+
+    <ul id="card-front"></ul>
+    <ul id="card-back"></ul>
+
+    <script>
+        //①まず１枚画像を出す  
+        // $(function(){
+        //      $('#card').append('<img src="trump/card_back.png" alt="" />');
+        // });
+        //②一枚読み込めたら、for文で繰り返す
+        // 基本の書き方：
+        // for ( var i = 初期値 ; 繰り返し条件 ; i++ ){ 処理 }
+
+        var omote = [
+            "<li class=1><img src='trump/club/card_club_01.png'></li>",
+            "<li class=2><img src='trump/club/card_club_02.png'></li>",
+            "<li class=3><img src='trump/club/card_club_03.png'></li>",
+            "<li class=4><img src='trump/club/card_club_04.png'></li>",
+            "<li class=5><img src='trump/club/card_club_05.png'></li>",
+            "<li class=6><img src='trump/club/card_club_06.png'></li>",
+            "<li class=7><img src='trump/club/card_club_07.png'></li>",
+            "<li class=8><img src='trump/club/card_club_08.png'></li>",
+            "<li class=9><img src='trump/club/card_club_09.png'></li>",
+            "<li class=10><img src='trump/club/card_club_10.png'></li>",
+            "<li class=11><img src='trump/club/card_club_11.png'></li>",
+            "<li class=12><img src='trump/club/card_club_12.png'></li>",
+            "<li class=13><img src='trump/club/card_club_13.png'></li>",
+            "<li class=1><img src='trump/dia/card_diamond_01.png'></li>",
+            "<li class=2><img src='trump/dia/card_diamond_02.png'></li>",
+            "<li class=3><img src='trump/dia/card_diamond_03.png'></li>",
+            "<li class=4><img src='trump/dia/card_diamond_04.png'></li>",
+            "<li class=5><img src='trump/dia/card_diamond_05.png'></li>",
+            "<li class=6><img src='trump/dia/card_diamond_06.png'></li>",
+            "<li class=7><img src='trump/dia/card_diamond_07.png'></li>",
+            "<li class=8><img src='trump/dia/card_diamond_08.png'></li>",
+            "<li class=9><img src='trump/dia/card_diamond_09.png'></li>",
+            "<li class=10><img src='trump/dia/card_diamond_10.png'></li>",
+            "<li class=11><img src='trump/dia/card_diamond_11.png'></li>",
+            "<li class=12><img src='trump/dia/card_diamond_12.png'></li>",
+            "<li class=13><img src='trump/dia/card_diamond_13.png'></li>",
+            "<li class=1><img src='trump/heart/card_heart_01.png'</li>",
+            "<li class=2><img src='trump/heart/card_heart_02.png'></li>",
+            "<li class=3><img src='trump/heart/card_heart_03.png'></li>",
+            "<li class=4><img src='trump/heart/card_heart_04.png'></li>",
+            "<li class=5><img src='trump/heart/card_heart_05.png'></li>",
+            "<li class=6><img src='trump/heart/card_heart_06.png'></li>",
+            "<li class=7><img src='trump/heart/card_heart_07.png'></li>",
+            "<li class=8><img src='trump/heart/card_heart_08.png'></li>",
+            "<li class=9><img src='trump/heart/card_heart_09.png'></li>",
+            "<li class=10><img src='trump/heart/card_heart_10.png'></li>",
+            "<li class=11><img src='trump/heart/card_heart_11.png'></li>",
+            "<li class=12><img src='trump/heart/card_heart_12.png'></li>",
+            "<li class=13><img src='trump/heart/card_heart_13.png'></li>",
+            "<li class=1><img src='trump/spade/card_spade_01.png'</li>",
+            "<li class=2><img src='trump/spade/card_spade_02.png'</li>",
+            "<li class=3><img src='trump/spade/card_spade_03.png'</li>",
+            "<li class=4><img src='trump/spade/card_spade_04.png'</li>",
+            "<li class=5><img src='trump/spade/card_spade_05.png'</li>",
+            "<li class=6><img src='trump/spade/card_spade_06.png'</li>",
+            "<li class=7><img src='trump/spade/card_spade_07.png'</li>",
+            "<li class=8><img src='trump/spade/card_spade_08.png'</li>",
+            "<li class=9><img src='trump/spade/card_spade_09.png'</li>",
+            "<li class=10><img src='trump/spade/card_spade_10.png'</li>",
+            "<li class=11><img src='trump/spade/card_spade_11.png'</li>",
+            "<li class=12><img src='trump/spade/card_spade_12.png'</li>",
+            "<li class=13><img src='trump/spade/card_spade_13.png'</li>"
+        ]
+        
+        // console.log(omote[0][0])
+        // debugger;
+
+        // 中身をランダムに並べ替える
+        omote.sort(function() {
+            return Math.random() - 0.5;
+        });
+        
+        var ura = "trump/card_back.png";
+        
+
+        for(var u = 0;u<52;u++){
+            $("#card-back").append(`<li><img src="trump/card_back.png"</li>`);
+        }
+
+
+        // var img = new Array();
+        for(var i = 0;i<omote.length;i++){
+            // 失敗したコード↓
+            // $("#card-front").append
+            // var image = new Image();
+            // img.push(image);
+            // document.write("src" + image +'">');
+            // 関数と文字列は足せない　型を揃えないと＋は使えない
+            // $('#card').attr('src', image);
+
+            // es6:テンプレートリテラル 文字列の中に変数を入れることができる            
+           
+                $("#card-front").append(omote[i]);
+                // $("#card-front").append("<li>a</li>");
+            
+        }
+
+
+         
+        // opacityとは・・・透明度のこと。0=透明
+        $(function(){
+            $('#card-back li').click(function(){
+                var index = $(this).index();
+                alert(index);
+                $('#card-back li').eq(index).css('opacity','0');
+            })
+        })
+        
+        // $(function(){
+        //     $('#card-back li').click(function(){
+        //          $('#card-front').addClass('one');
+        //     })
+        // })
+
+        // 変数を外に定義する
+        // 空の変数を用意して、奇数の時だけ新しい処理を始めるようにする
+        // フラグ
+
+        var num = 0;
+        var click = $(this).data("click");
+        var card=[];
+        
+        $("#card-back li").click(function(){
+            $(this).data("click", num);
+            console.log($(this).html());
+                if(num % 2 === 0){
+                    alert("奇数回目のクリック");
+                }
+                else{
+                    alert("偶数回のクリック")             
+                }
+            return false;
+        });
+
+        $("#card-back li").click(function(){
+            $(this).data("click", ++num);
+        });
+
+            
+                 
+     </script>
+    
+
+
+
+</body>
+</html>
